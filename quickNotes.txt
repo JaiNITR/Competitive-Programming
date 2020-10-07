@@ -1,0 +1,306 @@
+//define g again(bcz of test cases)
+g = vector<vector<int>>(n);
+
+// i am raj (as a input)
+getline(cin>>ws,s);
+
+a+b=a⊕b+2∗(a&b)
+
+-Rabin Karp algo
+-Tarjan algo to find articulation point(bridge)
+-Binary lifting
+
+#include<bits/stdc++.h>
+using namespace std ; 
+#define all(a) a.begin(),a.end()
+#define rall(a) a.rbegin(),a.rend()
+#define fast ios_base:: sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ll long long
+#define dd double
+#define vv vector<ll>
+#define mp make_pair
+#define pp pair<ll,ll>
+#define ff first
+#define ss second
+#define vp vector<pp>
+#define pb push_back
+ll const MOD=1e9+7;
+
+void solve()
+{
+
+}
+int main()
+{
+	fast;
+	int t;
+	cin>>t;
+	while(t--) solve();
+
+}
+
+bool sortbysec(const pair<int,int> &a, 
+              const pair<int,int> &b) 
+{ 
+    if(a.ff==b.ff)
+        return a.ss<b.ss;
+    else
+    return (a.ff < b.ff); 
+} 
+
+///comparator in set
+struct fun
+{
+    bool operator()(const pair<ll,pp> &a,const pair<ll,pp> &b) 
+    { 
+        if(a.ff==b.ff)
+            return a.ss.ff > b.ss.ff;
+        else
+            return a.ff > b.ff; 
+    } 
+};
+
+
+
+ll powermodm(ll x,ll n,ll M){ll result=1;while(n>0){if(n % 2 ==1)result=(result * x)%M;x=(x*x)%M;n=n/2;}return result;}
+ll power(ll _a,ll _b){ll _r=1;while(_b){if(_b%2==1)_r=(_r*_a);_b/=2;_a=(_a*_a);}return _r;}
+ll gcd(ll a,ll b){if(a==0)return b;return gcd(b%a,a);}
+ll lcm(ll a,ll b){return (max(a,b)/gcd(a,b))*min(a,b);}
+
+
+///DSU
+    vector<int>parent;
+    
+ 	int find(int x) {
+ 		return parent[x] == x ? x : find(parent[x]);
+ 	}
+    
+
+
+
+ll ipow(int x, int p){
+	lint ret = 1, piv = x;
+	while(p){
+		if(p & 1) ret = ret * piv % mod;
+		piv = piv * piv % mod;
+		p >>= 1;
+	}
+	return ret;
+}
+ 
+ll fact(int x){
+	lint ret = 1;
+	for(int i=1; i<=x; i++) ret = ret * i % mod;
+	return ret;
+}
+ 
+ll bino(int x, int y){
+	return fact(x) * ipow(fact(x - y) * fact(y) % mod, mod - 2) % mod;
+}
+
+//#no. of prime divisors of number(i) Ex. 10-->(2,5)   
+vector<int> Prime(3002, 0);
+
+	for(int k = 2; k < 3001; k++){
+
+		if (Prime[k] == 0){
+
+			for(int a = 2*k; a < 3001; a += k){
+
+				Prime[a] += 1;
+			}
+		}
+	}
+
+	int count = 0;
+
+	for(int a = 1; a <= n; a++){
+		if(Prime[a] == 2){
+			count += 1;
+		}
+	}
+	
+	cout << count << endl;
+
+
+
+
+
+int gcd(int a, int b) 
+{ 
+    if (b == 0) 
+        return a; 
+    return gcd(b, a % b);  
+      
+} 
+
+
+    void isprime()
+    {
+        memset(prime,true,N);
+        for(ll i=2;i*i<N;i++)
+        {
+            if(prime[i]==true)
+            {
+                for(ll j=i*i;j<N;j+=i)
+                {
+                    prime[j]=false;
+                }
+            }
+        }
+    }
+    ll power(ll a,ll n)
+    {
+        ll ans=1;
+        a=a%mod;
+        while(n>0)
+        {
+            if(n&1)
+            {
+                ans=(ans*a)%mod;
+            }
+            n=n>>1;
+            a=(a*a)%mod;
+        }
+        return ans;
+    }
+
+
+///dfs
+
+
+vector<int> val[100007];
+bool visit[100007];
+ll cnt=0;
+
+
+void dfs(int ind)
+{
+    
+   visit[ind]=true;
+    for(int it=0;it<val[ind].size();it++)
+    {
+         ll xm=val[ind][it];
+        if(!visit[xm])
+        {
+            
+            if(val[xm].size()-1>val[ind].size())
+                cnt++;
+            
+            
+            dfs(xm);
+        }
+    }
+    
+}
+int main()
+{
+	fast;
+   
+    int n,m,i,u,v;
+    cin>>n>>m;
+    
+  
+   
+    for(i=1;i<=m;i++)
+    {
+        cin>>u>>v;
+        val[u].pb(v);
+        val[v].pb(u);
+    }
+   
+    for(i=1;i<=n;i++)
+    {
+        if(!visit[i])
+        {
+            
+            dfs(i,val);
+            
+        }
+    }
+    
+   
+  
+            
+}
+
+
+///bfs using queue
+
+
+void bfs(int s){
+    vector<int> p(nodes+1,-1);
+    vector<bool> used(nodes+1,false);
+    queue<int> q;
+    
+    q.push(s);
+    used[s]=true;
+    while(!q.empty()){
+        int v=q.front();
+        q.pop();
+        
+        for(int e:adj[v]){
+            if(!used[e]){
+                q.push(e);
+                p[e]=v;
+                used[e]=true;
+
+            }
+        }
+    }
+
+
+// 2d list     list<list<int> > arr;
+
+ for(auto it=nested_list.begin();it!=nested_list.end();it++)
+    {
+        list<int>& i=*it;
+        for(auto j=i.begin();j!=i.end();j++)
+            cout<<*j<<" ";
+        cout<<"\n";
+    }
+
+
+///  #of nodes in its subtree
+
+vector<ll> p(200001,1);
+void dfs(ll r,ll d)
+{
+    vis[r]=1;
+    dep[r]=d;
+    for(ll i=0;i<v[r].sz;i++)
+    if(!vis[v[r][i]])
+    {
+    dfs(v[r][i],d+1);
+            p[r]+=p[v[r][i]];
+    }
+}
+
+#modified sort
+
+sort(record.begin(), record.end(),
+            [](int a,int b)
+             {return a > b;});
+
+
+#find u is ancestor of v(find whether u and v are in one subtree)
+
+
+int t=0;
+void dfs(int u)
+{
+    t++;
+    tin[u]=t;
+    
+    
+    for(auto it:adj[u])
+    {
+        if(!visit[it])
+        dfs(it);
+    }
+    tout[u]=t;
+}
+int isancesstor(int u,int v)
+{
+    return tin[u]<=tin[v] && tout[u]>=tout[v];
+}
